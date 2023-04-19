@@ -1,3 +1,3 @@
 create a directory called "images" under the data directory
 the images in that directory are the ones referenced within the instances.json files in refcoco-unc, refcocog-umd, and refcocoplus-unc
-they are a subset of the images that are found at http://images.cocodataset.org/zips/train2014.zip
+they can be found at https://drive.google.com/drive/folders/1mV0RBFnsphEFuNcAQ17tY11ejVO52uQk?usp=sharing
