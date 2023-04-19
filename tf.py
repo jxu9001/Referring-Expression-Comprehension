@@ -15,8 +15,9 @@ class text_tf(nn.Module):
                                                )
 
     def forward(self, input_ids, attention_mask):
+        #print(input_ids.shape, attention_mask.shape)
         outputs = self.model(input_ids=input_ids, attention_mask=attention_mask)
-        last_hidden_state = outputs[0][:,0,:].view(-1,768)
+        last_hidden_state = outputs[0]
         return last_hidden_state
 
 

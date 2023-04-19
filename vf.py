@@ -12,9 +12,9 @@ class image_tf(nn.Module):
 
 
     def forward(self, inputs):
-        with torch.no_grad():
-            outputs = self.model(**inputs)
-        print(outputs.last_hidden_state)
+        #with torch.no_grad():
+        outputs = self.model(**inputs)
+        #print(outputs.last_hidden_state)
         return outputs.last_hidden_state
 
     def patcher(self, image):

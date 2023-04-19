@@ -7,18 +7,16 @@ class Ensemble_Model(nn.Module):
         super(Ensemble_Model, self).__init__()
         self.Text_Model = modelA
         self.Image_Model = modelB
-        self.linear_bbox = nn.Linear(768, 4)
-    
-    def forward(self, text_embedding, image_embedding):
-        text_output = self.Text_Model(torch.tensor(text_embedding['input_ids']).unsqueeze(0), torch.tensor(text_embedding['attention_mask']).unsqueeze(0))
-        image_output = self.Image_Model(image_embedding)
-        
-        # Apply learned weights to the subnetwork outputs
-        text_output = text_output.unsqueeze(2).expand(-1, -1, 768)
-        print(text_output.shape, image_output.shape)
-        # Concatenate the subnetwork outputs along the second dimension
-        ensemble_output = torch.cat((text_output, image_output), dim=1)
+        self.hidden_layer1 = nn.Linear(544512, 256)
+        self.hidden_layer2 = nn.Linear(256, 128)
+        self.output_layer = nn.Linear(128, 4)
 
-        pred_boxes = self.linear_bbox(ensemble_output).sigmoid()
-        
-        return pred_boxes
+
+
+    def forward(self, text_input_ids, text_attention_mask, image_embedding):
+        text_input = self.Text_Model(text_input_ids, text_attention_mask)
+        image_input = self.Image_Model(image_embedding)
+        concat_input = torch.cat([torch.flatten(text_input), torch.flatten(image_input)])
+        output = self.output_layer(self.hidden_layer2(self.hidden_layer1(concat_input)))
+        return output
+
