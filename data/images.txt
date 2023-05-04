@@ -1,3 +1,0 @@
-create a directory called "images" under the data directory
-the images in that directory are the ones referenced within the instances.json files in refcoco-unc, refcocog-umd, and refcocoplus-unc
-they can be found at https://drive.google.com/drive/folders/1jw6yBVmySgfQbqFeieEocZ0-ijPEtmOU?usp=sharing
